@@ -12,13 +12,25 @@ const App = () => {
   const [passwordError, setPasswordError] = useState('');
   const [hasAccount, setHasAccount] = useState(false);
 
+  const clearInputs = () => {
+    setEmail('');
+    setPassword('');
+  };
+
+  const clearErrors = () => {
+    setEmailError('');
+    setPasswordError('');
+  };
+
   // See NPM Firebase: https://www.npmjs.com/package/firebase
 
   const handleLogin = () => {
+    clearErrors();
     fire
       .auth()
       .signInWithEmailAndPassword(email, password)
       .catch((err) => {
+        // eslint-disable-next-line default-case
         switch (err.code) {
           case 'auth/invalid-email':
           case 'auth/user-disabled':
@@ -33,6 +45,7 @@ const App = () => {
   };
 
   const handleSignup = () => {
+    clearErrors();
     fire
       .auth()
       .createUserWithEmailAndPassword(email, password)
@@ -57,6 +70,7 @@ const App = () => {
   const authListener = () => {
     fire.auth().onAuthStateChanged((user) => {
       if (user) {
+        clearInputs();
         setUser(user);
       } else {
         setUser('');
