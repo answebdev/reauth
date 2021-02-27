@@ -2,6 +2,7 @@ import { useState, useEffect } from 'react';
 import fire from './fire';
 import './App.css';
 import Login from './Login';
+import Hero from './Hero';
 
 // Source: https://www.youtube.com/watch?v=cFgoSrOui2M
 
@@ -85,18 +86,25 @@ const App = () => {
 
   return (
     <div className='App'>
-      <Login
-        email={email}
-        setEmail={setEmail}
-        password={password}
-        setPassword={setPassword}
-        handleLogin={handleLogin}
-        handleSignup={handleSignup}
-        hasAccount={hasAccount}
-        setHasAccount={setHasAccount}
-        emailError={emailError}
-        passwordError={passwordError}
-      />
+      {/* If 'user' exists, render the Hero component,
+      else (:), if no user exists, stay on the Login page.
+      And a user only exists if you either sign up or log in. */}
+      {user ? (
+        <Hero handleLogout={handleLogout} />
+      ) : (
+        <Login
+          email={email}
+          setEmail={setEmail}
+          password={password}
+          setPassword={setPassword}
+          handleLogin={handleLogin}
+          handleSignup={handleSignup}
+          hasAccount={hasAccount}
+          setHasAccount={setHasAccount}
+          emailError={emailError}
+          passwordError={passwordError}
+        />
+      )}
     </div>
   );
 };
