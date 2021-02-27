@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react';
 import fire from './fire';
 import './App.css';
+import Login from './Login';
 
 // Source: https://www.youtube.com/watch?v=cFgoSrOui2M
 
@@ -84,7 +85,18 @@ const App = () => {
 
   return (
     <div className='App'>
-      <h1>Reauth</h1>
+      <Login
+        email={email}
+        setEmail={setEmail}
+        password={password}
+        setPassword={setPassword}
+        handleLogin={handleLogin}
+        handleSignup={handleSignup}
+        hasAccount={hasAccount}
+        setHasAccount={setHasAccount}
+        emailError={emailError}
+        passwordError={passwordError}
+      />
     </div>
   );
 };
